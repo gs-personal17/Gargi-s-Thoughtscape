@@ -32,18 +32,46 @@
 }
 
 /* PAPER */
-.paper {
-  flex: 1;
-  padding: 40px;
-  background: #efe7dc;
+body {
+  margin: 0;
+  font-family: 'This Is Agni', cursive;
 
-  background-image:
-    linear-gradient(#d6ccc2 1px, transparent 1px),
-    linear-gradient(90deg, #d6ccc2 1px, transparent 1px),
-    url('/assets/images/paper-texture.png');
+  background: url('/assets/images/background.jpg') no-repeat center top;
+  background-size: cover;
+}
 
-  background-size: 25px 25px, 25px 25px, cover;
-  background-blend-mode: multiply;
+/* REMOVE fake paper + spiral */
+.page {
+  display: block;
+}
+
+/* CONTENT AREA (writing space) */
+.content {
+  max-width: 700px;
+  margin-left: 200px;  /* leaves space for spiral */
+  margin-top: 200px;
+
+  color: #3e342b;
+  line-height: 1.8;
+  font-size: 1.2rem;
+}
+
+/* TITLE (subject topic area) */
+.title {
+  position: absolute;
+  top: 80px;
+  left: 220px;
+
+  font-size: 1.5rem;
+  color: #5c3d3d;
+}
+
+/* OPTIONAL: sticker box text */
+.sticker-box {
+  position: absolute;
+  top: 80px;
+  right: 150px;
+  width: 250px;
 }
 
 /* STICKY */
