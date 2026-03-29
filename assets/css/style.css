@@ -29,7 +29,7 @@ body {
 
 /* COVER PAGE */
 .cover {
-  background-image: url('/assets/images/cover.png');
+  background-image: url('assets/images/cover.png');
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +44,7 @@ body {
 
 /* INDEX PAGE */
 .index {
-  background-image: url('/assets/images/index-bg.png');
+  background-image: url('assets/images/index-bg.png');
   padding: 50px;
 }
 
@@ -62,7 +62,7 @@ body {
 
 /* POST PAGE */
 .post {
-  background-image: url('/assets/images/post-bg.png');
+  background-image: url('assets/images/post-bg.png');
   padding: 40px;
 }
 
@@ -104,7 +104,7 @@ body {
 
 /* CONTENT */
 .content {
-  margin-left: 260px;
+  margin-left: 70px;
   margin-top: 200px;
   max-width: 600px;
   line-height: 1.8;
