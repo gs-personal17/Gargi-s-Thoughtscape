@@ -23,7 +23,7 @@ body {
   position: absolute;
   inset: 0;
   background: url('/assets/images/paper.png');
-  opacity: 0.25;
+  opacity: 0.75;
   pointer-events: none;
 }
 
