@@ -30,7 +30,8 @@ body {
 
 /* COVER PAGE */
 .cover {
-  background-image: url('assets/images/cover.png');no-repeat center;
+  background-image: url('assets/images/cover.png');
+  background-repeat: no-repeat center;
   background-size: cover;
   /*background-image: url('assets/images/cover.png');
   display: flex;
@@ -51,7 +52,8 @@ body {
 
 /* INDEX PAGE */
 .index {
-  background-image: url('assets/images/index-bg.png');no-repeat center;
+  background-image: url('assets/images/index-bg.png');
+  background-repeat: no-repeat center;
   background-size: cover;
   padding: 50px;
 }
@@ -70,7 +72,8 @@ body {
 
 /* POST PAGE */
 .post {
-  background-image: url('assets/images/post-bg.png');no-repeat center;
+  background-image: url('assets/images/post-bg.png');
+  background-repeat: no-repeat center;
   background-size: cover;
   padding: 40px;
 }
