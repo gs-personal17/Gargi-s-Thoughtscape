@@ -29,7 +29,7 @@ body {
 
 /* COVER PAGE */
 .cover {
-  background-image: url('/assets/images/cover.jpg');
+  background-image: url('/assets/images/cover.png');
   display: flex;
   align-items: center;
   justify-content: center;
