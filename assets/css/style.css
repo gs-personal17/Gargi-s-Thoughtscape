@@ -7,13 +7,13 @@ body {
   background-color: #f5efe6;
 }
 
-/* GENERAL BACKGROUND WITH TEXTURE 
+/* GENERAL BACKGROUND WITH TEXTURE*/
 .cover, .index, .post {
   position: relative;
   min-height: 100vh;
   background-size: cover;
   background-position: center;
-} */
+}
 
 /* PAPER TEXTURE OVERLAY
 .cover::before,
@@ -42,7 +42,7 @@ body {
 
 .cover h1 {
   font-family: 'Playfair Display', serif;
-  color: white;
+  color: #a8e4a0;
   font-size: 42px;
 }
 
