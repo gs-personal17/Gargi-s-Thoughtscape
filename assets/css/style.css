@@ -30,12 +30,14 @@ body {
 
 /* COVER PAGE */
 .cover {
-  background-image: url('assets/images/cover.png');
+  background-color: red;
+  height: 100vh;
+  /*background-image: url('assets/images/cover.png');
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 100vh;
+  height: 100vh;*/
   /*background-image: url('assets/images/cover.png');
   background-size: cover;
   background-position: center;*/
