@@ -49,7 +49,7 @@ body {
 /* INDEX PAGE */
 .index {
   background-image: url('assets/images/index-bg.png');
-  padding: 50px;
+  /*padding: 50px;*/
 }
 
 .index h2 {
@@ -67,7 +67,7 @@ body {
 /* POST PAGE */
 .post {
   background-image: url('assets/images/post-bg.png');
-  padding: 40px;
+  /*padding: 40px;*/
 }
 
 /* STICKY NOTE */
