@@ -30,7 +30,7 @@ body {
 
 /* COVER PAGE */
 .cover {
-  background-image: url('assets/images/cover.png');
+  background-image: url('../images/cover.png');
   background-repeat: no-repeat,center;
   background-size: cover;
   /*background-image: url('assets/images/cover.png');
@@ -52,7 +52,7 @@ body {
 
 /* INDEX PAGE */
 .index {
-  background-image: url('assets/images/index-bg.png');
+  background-image: url('../images/index-bg.png');
   background-repeat: no-repeat,center;
   background-size: cover;
   padding: 50px;
@@ -72,7 +72,7 @@ body {
 
 /* POST PAGE */
 .post {
-  background-image: url('assets/images/post-bg.png');
+  background-image: url('../images/post-bg.png');
   background-repeat: no-repeat,center;
   background-size: cover;
   padding: 40px;
