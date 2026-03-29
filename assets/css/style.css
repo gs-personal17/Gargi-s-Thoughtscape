@@ -30,14 +30,12 @@ body {
 
 /* COVER PAGE */
 .cover {
-  background-color: red;
-  height: 100vh;
-  /*background-image: url('assets/images/cover.png');
+  background-image: url('assets/images/cover.png');
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 100vh;*/
+  height: 100vh;
   /*background-image: url('assets/images/cover.png');
   background-size: cover;
   background-position: center;*/
@@ -52,7 +50,7 @@ body {
 /* INDEX PAGE */
 .index {
   background-image: url('assets/images/index-bg.png');
-  /*padding: 50px;*/
+  padding: 50px;
 }
 
 .index h2 {
@@ -70,7 +68,7 @@ body {
 /* POST PAGE */
 .post {
   background-image: url('assets/images/post-bg.png');
-  /*padding: 40px;*/
+  padding: 40px;
 }
 
 /* STICKY NOTE */
