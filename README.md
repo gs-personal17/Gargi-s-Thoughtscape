@@ -1,2 +1,2 @@
-# Gargi-s-Thoughtscape
+# blogs
 Blog
