@@ -10,10 +10,12 @@ body {
 
 /* GENERAL BACKGROUND WITH TEXTURE*/
 .cover, .index, .post {
+  width: 100%
   position: relative;
   min-height: 100vh;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat, center;
 }
 
 /* PAPER TEXTURE OVERLAY
