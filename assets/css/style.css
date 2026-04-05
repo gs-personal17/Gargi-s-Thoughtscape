@@ -62,12 +62,12 @@ body {
 
 .index h2 {
   font-family: 'Playfair Display', serif;
-  margin-top: 200px;
+  margin-top: 80px;
 }
 
 .index a {
   display: block;
-  margin: 15px 0;
+  margin: 40px 0;
   font-size: 20px;
   color: #5a4636;
   text-decoration: none;
@@ -85,7 +85,7 @@ body {
 /* STICKY NOTE */
 .sticky {
   position: absolute;
-  left: 30px;
+  left: 50px;
   top: 200px;
   background: #b7c9a8;
   padding: 20px;
