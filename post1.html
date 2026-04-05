@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
 <div class="post">
@@ -12,19 +13,127 @@
   </div>
 
   <div class="content">
-    <p>
-      I’m a corporate slave now, working from 7:45 to 4:30. I wake up at 6:15 and rush to catch my cab around 7.Every day, on my way to the office, I notice people. It’s kind of my hobby (yeah, I people watch like it’s a sport). When I was a kid, I used to wake up at 5:45. My school bus would arrive around 6:35 to 6:40 AM. I always loved going to school, no matter how early I had to wake up. And now? I struggle to even get up at 6:15. What a plot twist.
-That contrast sparked a thought in my head, the duality of life.
-While sitting in the cab, I see kids heading to school, parents dropping them off at the bus stop. At the same time, I see adults heading to their offices, either in cabs like me or on their own vehicles. And I can’t help but think, we’re kind of doing the same thing we did as kids, just with fancier clothes and worse sleep.
-As kids, we thought being an adult would magically change everything. But it doesn’t. Sometimes, I see a little boy crying because he doesn’t want to go to school. And sometimes, I see another kid who’s excited, smiling, maybe for a field trip or just to meet his friends. At that age, we don’t really understand the importance of these everyday routines.
-Now, I feel like almost every employee drags themselves to work without much enthusiasm. It’s just a bigger version of school, with more coffee and less recess. 
+    <p>I’m a corporate slave now, working from 7:45 to 4:30. I wake up at 6:15 and rush to catch my cab around 7. Every day, on my way to the office, I notice people. It’s kind of my hobby (yeah, I people watch like it’s a sport). When I was a kid, I used to wake up at 5:45. My school bus would arrive around 6:35 to 6:40 AM. I always loved going to school, no matter how early I had to wake up. And now? I struggle to even get up at 6:15. What a plot twist. </p>
+<p>That contrast sparked a thought in my head, the duality of life.
+While sitting in the cab, I see kids heading to school, parents dropping them off at the bus stop. At the same time, I see adults heading to their offices, either in cabs like me or on their own vehicles. And I can’t help but think, we’re kind of doing the same thing we did as kids, just with fancier clothes and worse sleep.</p>
+<p>As kids, we thought being an adult would magically change everything. But it doesn’t. Sometimes, I see a little boy crying because he doesn’t want to go to school. And sometimes, I see another kid who’s excited, smiling, maybe for a field trip or just to meet his friends. At that age, we don’t really understand the importance of these everyday routines.</p>
+<p>Now, I feel like almost every employee drags themselves to work without much enthusiasm. It’s just a bigger version of school, with more coffee and less recess. 
 Another thing I love seeing in the morning? Old people out for a walk or chilling with a newspaper outside their homes. Sometimes, they sit together, sip hot tea, and chat with their friends. That’s the third stage of life, isn’t it? 
-I wonder if they look at us, rushing to work, and at the kids waiting for school buses, and think,“Yep… those were the days I used to hustle." Now, they seem at peace. Maybe because they’ve already fought their battles.
+</p>
+<p>I wonder if they look at us, rushing to work, and at the kids waiting for school buses, and think,“Yep… those were the days I used to hustle." Now, they seem at peace. Maybe because they’ve already fought their battles.
 And I hope, someday, when I’m 70, I’ll be able to see this same picture and say,“Yeah, I imagined this back when I was 25.” 
-    </p>
+</p>
+  </div>
+
+  <!-- ❤️ LIKE BUTTON -->
+  <div class="reaction">
+    ❤️ <span id="likeCount">0</span>
+    <button onclick="likePost()">Like</button>
+  </div>
+
+  <!-- 💬 COMMENTS -->
+  <div class="comments">
+    <h3>Comments</h3>
+
+    <input id="name" placeholder="Your name">
+    <textarea id="comment" placeholder="Write something..."></textarea>
+    <button onclick="addComment()">Post</button>
+
+    <div id="commentList"></div>
   </div>
 
 </div>
+
+<!-- 🔥 FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAfD96Cp3UVN8hcfEb8-c6r7GNLXNfP5o8",
+  authDomain: "my-journal-88561.firebaseapp.com",
+  projectId: "my-journal-88561",
+  storageBucket: "my-journal-88561.appspot.com",
+  messagingSenderId: "329479416541",
+  appId: "1:329479416541:web:4a187df112ba74b55e4934"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+<!-- ❤️ LIKE SCRIPT -->
+<script>
+const postRef = db.collection("posts").doc("post1");
+
+postRef.onSnapshot(doc => {
+  if (doc.exists) {
+    document.getElementById("likeCount").innerText = doc.data().likes || 0;
+  }
+});
+
+function likePost() {
+  postRef.set(
+    { likes: firebase.firestore.FieldValue.increment(1) },
+    { merge: true }
+  );
+}
+</script>
+
+<!-- 💬 COMMENTS SCRIPT -->
+<script>
+function addComment() {
+  const name = document.getElementById("name").value;
+  const text = document.getElementById("comment").value;
+
+  if (!name || !text) return;
+
+  db.collection("posts")
+    .doc("post1")
+    .collection("comments")
+    .add({
+      name: name,
+      text: text,
+      time: Date.now()
+    });
+
+  document.getElementById("comment").value = "";
+}
+
+function timeAgo(timestamp) {
+  const now = Date.now();
+  const diff = Math.floor((now - timestamp) / 1000);
+
+  if (diff < 60) return "just now";
+  if (diff < 3600) return Math.floor(diff / 60) + " min ago";
+  if (diff < 86400) return Math.floor(diff / 3600) + " hrs ago";
+  if (diff < 604800) return Math.floor(diff / 86400) + " days ago";
+
+  return new Date(timestamp).toLocaleDateString();
+}
+
+db.collection("posts")
+  .doc("post1")
+  .collection("comments")
+  .orderBy("time", "desc")
+  .onSnapshot(snapshot => {
+
+    let html = "";
+
+    snapshot.forEach(doc => {
+      const c = doc.data();
+
+      html += `
+        <div class="comment">
+          <p><b>${c.name}</b> • ${timeAgo(c.time)}</p>
+          <p>${c.text}</p>
+        </div>
+      `;
+    });
+
+    document.getElementById("commentList").innerHTML = html;
+  });
+</script>
 
 </body>
 </html>
