@@ -83,7 +83,7 @@ const db = firebase.firestore();
 <!-- ❤️ LIKE SCRIPT -->
 <script>
 const postId = window.location.pathname;
-const postRef = db.collection("posts").doc(postId);
+const postRef = db.collection("posts").doc(post2);
 
 postRef.onSnapshot(doc => {
   if (doc.exists) {
@@ -132,7 +132,7 @@ function timeAgo(timestamp) {
 }
 
 db.collection("posts")
-  .doc("post1")
+  .doc("post2")
   .collection("comments")
   .orderBy("time", "desc")
   .onSnapshot(snapshot => {
