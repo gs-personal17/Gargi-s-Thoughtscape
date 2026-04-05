@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="post">
+
+  <div class="sticky">
+    Movie Review: Ratatouille
+  </div>
+
+  <div class="content">
+    <p>I was scrolling through Instagram when I came across a reel. It showed the real-life chef who inspired the original recipe of Ratatouille. That instantly made me curious, so I decided to watch the movie.</p>
+
+<p>The story begins with a rat named Remy, who lives with his large rat family. Remy has a special gift. He can smell food and understand exactly what it is. His father does not really appreciate this ability at first. One day, Remy warns the other rats not to eat some food because he detects rat poison in it. From that moment on, everyone starts checking with him before eating anything they steal. This finally makes his father proud.</p>
+
+<p>But that is not all. Remy also has another unusual ability. He can read. Sounds surprising, right?</p>
+
+<p>Unlike the others, Remy does not like eating stolen food. He prefers fresh, well-prepared meals. So he secretly visits a nearby house to enjoy fresh food. The house belongs to an old lady who spends her time watching a cooking show hosted by the famous chef Auguste Gusteau. Remy watches the show along with her and becomes deeply inspired. He starts dreaming about cooking.</p>
+
+<p>I found this idea very interesting and unexpected. A rat who can read and wants to cook. Such a unique concept!!</p>
+
+<p>One day, Remy enters the house with his brother. He tries to find Gusteau’s cookbook because he wants to cook a proper dish himself. While searching for ingredients, he also learns from the television that the chef lost one of his Michelin stars and later passed away. This news makes Remy very sad. Around the same time, the old lady notices them and tries to shoot them with her gun.</p>
+
+<p>After this, things quickly spiral out of control. The rats are forced to escape the house. Remy manages to grab the chef’s book as they run toward a nearby canal. In the chaos, he gets separated from his family and cannot catch up with them. He ends up alone, sitting by the drainage, confused about what to do next. And yes, he is hungry too.</p>
+
+<p>At this point, something magical happens. The spirit of Chef Gusteau appears and starts talking to him. The chef encourages Remy to step out and explore. When Remy finally comes out from the tunnel, he discovers that he is in Paris. He feels a sudden rush of excitement and hope.</p>
+
+<p>Soon, he tries to steal food from a party, but the chef reminds him of his own values. Remy realizes that he should not steal. The chef then guides him to Gusteau’s restaurant. Remy is overjoyed. However, once inside, he notices that everything is in chaos. While trying to leave, he sees a soup being ruined. Unable to resist, he steps in and fixes it in his own way.</p>
+
+<p>The soup is served to a food critic, and she loves it. She calls the head chef and tells him that the restaurant might regain its lost star.
+
+And that is where things take an interesting turn.</p>
+
+<p>I will not reveal the entire story, but there is a moment where all the rats are shown cooking together in the kitchen. Honestly, that part felt a bit gross to watch.</p>
+
+<p>I feel Ratatouille carries a beautiful message. It reminds us to be passionate about what we love and to pursue what truly excites us. With dedication, we can achieve more than we imagine.</p>
+
+<p>And most importantly, it tells us something simple yet powerful
+Anyone can cook 😉</p>
+  </div>
+
+  <!-- ❤️ LIKE BUTTON -->
+  <div class="reaction">
+    ❤️ <span id="likeCount">0</span>
+    <button onclick="likePost()">Like</button>
+  </div>
+
+  <!-- 💬 COMMENTS -->
+  <div class="comments">
+    <h3>Comments</h3>
+
+    <input id="name" placeholder="Your name">
+    <textarea id="comment" placeholder="Write something..."></textarea>
+    <button onclick="addComment()">Post</button>
+
+    <div id="commentList"></div>
+  </div>
+
+</div>
+
+<!-- 🔥 FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAfD96Cp3UVN8hcfEb8-c6r7GNLXNfP5o8",
+  authDomain: "my-journal-88561.firebaseapp.com",
+  projectId: "my-journal-88561",
+  storageBucket: "my-journal-88561.appspot.com",
+  messagingSenderId: "329479416541",
+  appId: "1:329479416541:web:4a187df112ba74b55e4934"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+<!-- ❤️ LIKE SCRIPT -->
+<script>
+const postRef = db.collection("posts").doc("post1");
+
+postRef.onSnapshot(doc => {
+  if (doc.exists) {
+    document.getElementById("likeCount").innerText = doc.data().likes || 0;
+  }
+});
+
+function likePost() {
+  postRef.set(
+    { likes: firebase.firestore.FieldValue.increment(1) },
+    { merge: true }
+  );
+}
+</script>
+
+<!-- 💬 COMMENTS SCRIPT -->
+<script>
+function addComment() {
+  const name = document.getElementById("name").value;
+  const text = document.getElementById("comment").value;
+
+  if (!name || !text) return;
+
+  db.collection("posts")
+    .doc("post1")
+    .collection("comments")
+    .add({
+      name: name,
+      text: text,
+      time: Date.now()
+    });
+
+  document.getElementById("comment").value = "";
+}
+
+function timeAgo(timestamp) {
+  const now = Date.now();
+  const diff = Math.floor((now - timestamp) / 1000);
+
+  if (diff < 60) return "just now";
+  if (diff < 3600) return Math.floor(diff / 60) + " min ago";
+  if (diff < 86400) return Math.floor(diff / 3600) + " hrs ago";
+  if (diff < 604800) return Math.floor(diff / 86400) + " days ago";
+
+  return new Date(timestamp).toLocaleDateString();
+}
+
+db.collection("posts")
+  .doc("post1")
+  .collection("comments")
+  .orderBy("time", "desc")
+  .onSnapshot(snapshot => {
+
+    let html = "";
+
+    snapshot.forEach(doc => {
+      const c = doc.data();
+
+      html += `
+        <div class="comment">
+          <p><b>${c.name}</b> • ${timeAgo(c.time)}</p>
+          <p>${c.text}</p>
+        </div>
+      `;
+    });
+
+    document.getElementById("commentList").innerHTML = html;
+  });
+</script>
+
+</body>
+</html>
