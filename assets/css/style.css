@@ -67,7 +67,7 @@ body {
 
 .index a {
   display: block;
-  margin: 40px 0;
+  margin: 70px 0;
   font-size: 20px;
   color: #5a4636;
   text-decoration: none;
@@ -86,7 +86,7 @@ body {
 .sticky {
   position: absolute;
   left: 50px;
-  top: 200px;
+  top: 210px;
   background: #b7c9a8;
   padding: 20px;
   width: 200px;
