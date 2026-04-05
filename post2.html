@@ -82,7 +82,8 @@ const db = firebase.firestore();
 
 <!-- ❤️ LIKE SCRIPT -->
 <script>
-const postRef = db.collection("posts").doc("post1");
+const postId = window.location.pathname;
+const postRef = db.collection("posts").doc(postId);
 
 postRef.onSnapshot(doc => {
   if (doc.exists) {
@@ -107,8 +108,8 @@ function addComment() {
   if (!name || !text) return;
 
   db.collection("posts")
-    .doc("post1")
-    .collection("comments")
+  .doc(postId)
+  .collection("comments")
     .add({
       name: name,
       text: text,
